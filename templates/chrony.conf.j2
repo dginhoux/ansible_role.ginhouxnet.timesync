@@ -1,0 +1,54 @@
+# {{ ansible_managed }}
+
+# These servers were defined in the installation:
+{% if ntp_pools is defined and ntp_pools | length > 0 %}
+{% for pool in ntp_pools %}
+pool {{ pool }}
+{% endfor %}
+{% endif %}
+
+{% if ntp_servers is defined and ntp_servers | length > 0 %}
+{% for server in ntp_servers %}
+server {{ server }}
+{% endfor %}
+{% endif %}
+
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
+
+# Record the rate at which the system clock gains/losses time.
+driftfile {{ ntp_chrony_driftfile }}
+
+# Allow the system clock to be stepped in the first three updates
+# if its offset is larger than 1 second.
+makestep 1.0 3
+
+# Enable kernel synchronization of the real-time clock (RTC).
+rtcsync
+
+# Enable hardware timestamping on all interfaces that support it.
+#hwtimestamp *
+
+# Increase the minimum number of selectable sources required to adjust
+# the system clock.
+minsources 2
+
+# Allow NTP client access from local network.
+{% if ntp_chrony_allow is defined and ntp_chrony_allow | length > 0 %}
+{% for allow in ntp_chrony_allow %}
+allow {{ allow }}
+{% endfor %}
+{% endif %}
+
+# Serve time even if not synchronized to a time source.
+#local stratum 10
+
+# This directive specify the location of the file containing ID/key pairs for
+# NTP authentication.
+keyfile {{ ntp_chrony_keyfile }}
+
+# Specify directory for log files.
+logdir {{ ntp_chrony_logdir }}
+
+# Select which information is logged.
+log measurements statistics tracking

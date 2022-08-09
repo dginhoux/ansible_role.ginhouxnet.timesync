@@ -1,0 +1,7 @@
+---
+- name: restart selected daemon
+  service:
+    name: "{{ item }}"
+    state: restarted
+  loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_enable_service | flatten }}"
+  when: ntp_manage_services | bool
