@@ -29,8 +29,11 @@ Example Playbook
 License
 -------
 
+BSD
 
 
 Author Information
 ------------------
+
+Dany GINHOUX
 

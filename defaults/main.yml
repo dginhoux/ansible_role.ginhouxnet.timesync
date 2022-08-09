@@ -11,8 +11,6 @@ ntp_daemon_choice: ntp
 
 ntp_timezone: Europe/Paris
 
-# ntp_config_file: /etc/ntp.conf
-# ntp_driftfile: [various]
 
 
 ntp_servers:
@@ -34,9 +32,6 @@ ntp_chrony_allow:
 ntp_ntpd_tinker_panic: false
 
 ntp_ntpd_restrict:
-  # - "127.0.0.1"
-  # - "::1"
-  # - "default kod notrap nomodify nopeer noquery"
   - "127.0.0.1 nomodify"
   - "-4 default kod notrap nomodify nopeer noquery"
   - "-6 default kod notrap nomodify nopeer noquery"
