@@ -1,7 +1,7 @@
-Role Name
+ginhouxnet.timesync
 =========
 
-This ansible role can configure chrony OR ntp for clock synchronization
+This ansible role can configure chrony OR ntp for clock synchronization ; it allow a easier switch between chrony and ntp.
 
 
 Requirements
