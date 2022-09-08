@@ -1,7 +1,7 @@
 ---
 
 galaxy_info:
-  role_name: ginhouxnet.timesync
+  role_name: timesync
   description: configure ntpd or chronyd
   author: dginhoux
   company: ginhouxnet
