@@ -1,4 +1,4 @@
-ginhouxnet.timesync
+Ansible Role : dginhoux.timesync
 =========
 
 This ansible role can configure chrony OR ntp for clock synchronization
