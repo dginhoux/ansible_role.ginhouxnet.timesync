@@ -11,8 +11,6 @@ ntp_daemon_choice: ntp
 
 ntp_timezone: Europe/Paris
 
-
-
 ntp_servers:
   - "ntp1.infra.ginhoux.net iburst"
   - "ntp2.infra.ginhoux.net iburst"
@@ -23,7 +21,6 @@ ntp_pools:
   - "1.fr.pool.ntp.org iburst"
   - "2.fr.pool.ntp.org iburst"
   - "3.fr.pool.ntp.org iburst"
-
 
 ntp_chrony_allow:
   - "127.0.0.1/32"

@@ -1,5 +1,4 @@
 ---
-
 galaxy_info:
   role_name: timesync
   description: configure ntpd or chronyd
@@ -26,6 +25,5 @@ galaxy_info:
     - ntp
     - chrony
     - timesync
-
 
 dependencies: []

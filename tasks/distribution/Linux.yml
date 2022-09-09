@@ -6,14 +6,12 @@
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_install_package | flatten }}"
   when: ntp_install_package | bool
 
-
 - name: remove other daemon package
   package:
     name: "{{ item }}"
     state: absent
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_remove_package | flatten }}"
   when: ntp_remove_package | bool
-
 
 - name: install tzdata package
   package:
@@ -22,7 +20,6 @@
   loop: "{{ ntp_tzdata_package | flatten }}"
   when: ntp_install_tzdata | bool
 
-
 - name: set timezone
   copy:
     dest: "{{ ntp_timezone_file }}"
@@ -30,7 +27,6 @@
     mode: 0644
     owner: root
     group: root
-
 
 - name: create chrony confdir
   file:
@@ -41,7 +37,6 @@
     group: root
   when: ntp_daemon_choice == "chrony"
 
-
 - name: create chrony envfile
   copy:
     content: |
@@ -51,10 +46,9 @@
     mode: 0644
     owner: root
     group: root
-  when: 
+  when:
     - ntp_daemon_choice == "chrony"
     - ansible_os_family == "RedHat"
-
 
 - name: create chrony envfile
   copy:
@@ -65,10 +59,9 @@
     mode: 0644
     owner: root
     group: root
-  when: 
+  when:
     - ntp_daemon_choice == "chrony"
     - ansible_os_family == "Debian"
-
 
 - name: generate selected daemon configuration file
   template:
@@ -80,7 +73,6 @@
   notify: restart selected daemon
   when: ntp_manage_config | bool
 
-
 - name: disable and stop other daemon service
   service:
     name: "{{ item }}"
@@ -88,8 +80,7 @@
     enabled: false
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_disable_service | flatten }}"
   when: ntp_manage_services | bool
-  ignore_errors: yes
-
+  ignore_errors: true
 
 - name: enable and stop selected daemon service
   service:
@@ -99,12 +90,10 @@
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_enable_service | flatten }}"
   when: ntp_manage_services | bool
 
-
 - name: "systemd daemon-reload"
   systemd:
     daemon_reload: true
   when: ansible_service_mgr == "systemd"
-
 
 - name: start selected daemon service
   service:
