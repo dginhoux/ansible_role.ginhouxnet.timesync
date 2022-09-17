@@ -1,6 +1,6 @@
 ---
 - name: restart selected daemon
-  service:
+  ansible.builtin.service:
     name: "{{ item }}"
     state: restarted
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_enable_service | flatten }}"

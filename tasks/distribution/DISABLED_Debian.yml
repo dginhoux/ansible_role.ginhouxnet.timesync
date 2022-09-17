@@ -1,18 +1,18 @@
 ---
 - name: install ntp package
-  package:
+  ansible.builtin.package:
     name: "{{ ntp_package }}"
     state: present
 
 
 - name: install tzdata package
-  package:
+  ansible.builtin.package:
     name: "{{ ntp_tzdata_package }}"
     state: present
 
 
 - name: set timezone
-  copy:
+  ansible.builtin.copy:
     dest: "{{ ntp_timezone_file }}"
     content: |
       # Ansible managed
@@ -23,7 +23,7 @@
 
 
 - name: generate ntp configuration file
-  template:
+  ansible.builtin.template:
     src: "{{ ntp_config_file | basename }}.j2"
     dest: "{{ ntp_config_file }}"
     mode: 0644
@@ -34,7 +34,7 @@
 
 
 - name: disable systemd-timesyncd
-  service:
+  ansible.builtin.service:
     name: systemd-timesyncd.service
     enabled: false
     state: stopped
@@ -44,7 +44,7 @@
 
 
 - name: enable and start ntp service
-  service:
+  ansible.builtin.service:
     name: "{{ ntp_daemon }}"
     state: started
     enabled: true
@@ -52,7 +52,7 @@
 
 
 - name: disable and start ntp service
-  service:
+  ansible.builtin.service:
     name: "{{ ntp_daemon }}"
     state: stopped
     enabled: false
@@ -60,7 +60,7 @@
 
 
 # - name: disable systemd-timesyncd
-#   service:
+#   ansible.builtin.service:
 #     name: systemd-timesyncd.service
 #     enabled: false
 #     state: stopped
