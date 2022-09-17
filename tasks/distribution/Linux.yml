@@ -29,7 +29,7 @@
 #     group: root
 
 - name: set timezone
-  timezone:
+  community.general.timezone:
     name: "{{ ntp_timezone }}"
     # hwclock: UTC
 
