@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: timesync
-  description: configure ntpd or chronyd
+  description: configure ntp, timesync or chrony
   author: dginhoux
   company: ginhouxnet
   license: BSD

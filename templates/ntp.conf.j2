@@ -25,13 +25,13 @@ tinker panic 0
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
 {% if ntp_pools is defined and ntp_pools | length > 0 %}
 {% for pool in ntp_pools %}
-pool {{ pool }}
+pool {{ pool }} iburst
 {% endfor %}
 {% endif %}
 
 {% if ntp_servers is defined and ntp_servers | length > 0 %}
 {% for item in ntp_servers %}
-server {{ item }}
+server {{ item }} iburst
 {% endfor %}
 {% endif %}
 

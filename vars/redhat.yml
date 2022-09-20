@@ -22,6 +22,17 @@ ntp_daemon_conf:
       - ntp
       - systemd-timesyncd
     ntp_daemon_config_file: /etc/chrony/chrony.conf
+  timesyncd:
+    ntp_daemon_install_package: []
+    ntp_daemon_remove_package:
+      - chrony
+      - ntp
+    ntp_daemon_enable_service:
+      - systemd-timesyncd
+    ntp_daemon_disable_service:
+      - chronyd
+      - ntp
+    ntp_daemon_config_file: /etc/systemd/timesyncd.conf
 
 ntp_tzdata_package:
   - tzdata
