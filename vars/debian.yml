@@ -43,4 +43,5 @@ ntp_chrony_keyfile: /etc/chrony/chrony.keys
 ntp_chrony_confdir: /etc/chrony
 ntp_chrony_logdir: /var/log/chrony
 ntp_chrony_envfile: /etc/default/chrony
+
 ntp_ntpd_driftfile: /var/lib/ntp/drift
