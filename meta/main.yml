@@ -1,7 +1,9 @@
 ---
 galaxy_info:
   role_name: timesync
-  description: dginhoux.timesync
+  description: |
+    This ansible role can configure chrony OR ntp for clock synchronization. 
+    It allow an easy switch between `chrony`, `timesync`, and `ntpd`.
   author: Dany GINHOUX
   company: dginhoux
   license: MIT
