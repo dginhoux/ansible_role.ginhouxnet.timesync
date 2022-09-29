@@ -1,4 +1,4 @@
-# ROLE dginhoux.timesync
+# ROLE dginhoux.ntp_sync
 
 
 
@@ -38,12 +38,12 @@ None.
 #### ANSIBLE GALAXY
 
 ```shell
-ansible-galaxy install dginhoux.timesync
+ansible-galaxy install dginhoux.ntp_sync
 ```
 #### GIT
 
 ```shell
-git clone https://github.com/dginhoux/ansible_role.timesync dginhoux.timesync
+git clone https://github.com/dginhoux/ansible_role.ntp_sync dginhoux.ntp_sync
 ```
 
 
@@ -54,9 +54,9 @@ git clone https://github.com/dginhoux/ansible_role.timesync dginhoux.timesync
 ```yaml
 - hosts: all
   roles:
-    - name: start role dginhoux.timesync
+    - name: start role dginhoux.ntp_sync
       ansible.builtin.include_role:
-        name: dginhoux.timesync
+        name: dginhoux.ntp_sync
 ```
 
 

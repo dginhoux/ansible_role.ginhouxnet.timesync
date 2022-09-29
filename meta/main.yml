@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: timesync
+  role_name: ntp_sync
   description: |
     This ansible role can configure chrony OR ntp for clock synchronization. 
     It allow an easy switch between `chrony`, `timesync`, and `ntpd`.
@@ -25,7 +25,8 @@ galaxy_info:
         - "8"
   galaxy_tags:
     - ntp
+    - ntpd
     - chrony
-    - timesync
+    - timesyncd
 
 dependencies: []
