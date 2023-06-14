@@ -1,20 +1,23 @@
 ---
-- name: "Install daemon packages for use {{ ntp_daemon_choice }}"
-  when: ntp_install_package | bool
+- name: Install daemon packages for use {{ ntp_daemon_choice }}
+  when:
+    - ntp_install_package | bool
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_install_package | flatten }}"
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
 
 - name: Remove other daemons packages
-  when: ntp_remove_package | bool
+  when:
+    - ntp_remove_package | bool
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_remove_package | flatten }}"
   ansible.builtin.package:
     name: "{{ item }}"
     state: absent
 
 - name: Install tzdata packages
-  when: ntp_install_tzdata | bool
+  when:
+    - ntp_install_tzdata | bool
   loop: "{{ ntp_tzdata_package | flatten }}"
   ansible.builtin.package:
     name: "{{ item }}"
@@ -34,7 +37,8 @@
     # hwclock: UTC
 
 - name: Create chrony confdir
-  when: ntp_daemon_choice == "chrony"
+  when:
+    - ntp_daemon_choice == "chrony"
   ansible.builtin.file:
     path: "{{ ntp_chrony_confdir }}"
     state: directory
@@ -68,8 +72,9 @@
     owner: root
     group: root
 
-- name: "Generate daemon configuration file for {{ ntp_daemon_choice }}"
-  when: ntp_manage_config | bool
+- name: Generate daemon configuration file for {{ ntp_daemon_choice }}
+  when:
+    - ntp_manage_config | bool
   notify: restart selected daemon
   ansible.builtin.template:
     src: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_config_file | basename }}.j2"
@@ -79,11 +84,12 @@
     group: root
 
 - name: Disable and stop others daemon services
-  when: ntp_manage_services | bool
+  when:
+    - ntp_manage_services | bool
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_disable_service | flatten }}"
   ignore_errors: true
   # no_log: true
-  failed_when: false
+  # failed_when: false
   ansible.builtin.service:
     name: "{{ item }}"
     state: stopped
@@ -97,13 +103,15 @@
 #   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_enable_service | flatten }}"
 #   when: ntp_manage_services | bool
 
-- name: "Systemd daemon-reload"
-  when: ansible_service_mgr == "systemd"
+- name: Systemd daemon-reload
+  when:
+    - ansible_service_mgr == "systemd"
   ansible.builtin.systemd:
     daemon_reload: true
 
-- name: "Restart daemon service for {{ ntp_daemon_choice }}"
-  when: ntp_manage_services | bool
+- name: Restart daemon service for {{ ntp_daemon_choice }}
+  when:
+    - ntp_manage_services | bool
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_enable_service | flatten }}"
   ansible.builtin.service:
     name: "{{ item }}"

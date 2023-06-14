@@ -13,24 +13,24 @@ ntp_daemon_choice: ntp
 ntp_timezone: Europe/Paris
 
 ntp_servers:
-  - "ntp1.infra.ginhoux.net"
-  - "ntp2.infra.ginhoux.net"
-  - "ntp3.infra.ginhoux.net"
+  - ntp1.infra.ginhoux.net
+  - ntp2.infra.ginhoux.net
+  - ntp3.infra.ginhoux.net
 
 ntp_pools:
   - "0.fr.pool.ntp.org"
-  - "1.fr.pool.ntp.org"
-  - "2.fr.pool.ntp.org"
-  - "3.fr.pool.ntp.org"
+  - 1.fr.pool.ntp.org
+  - 2.fr.pool.ntp.org
+  - 3.fr.pool.ntp.org
 
 ntp_chrony_allow:
-  - "127.0.0.1/32"
-  - "192.168.0.0/16"
+  - 127.0.0.1/32
+  - 192.168.0.0/16
 
 ntp_ntpd_tinker_panic: false
 
 ntp_ntpd_restrict:
-  - "127.0.0.1 nomodify"
-  - "-4 default kod notrap nomodify nopeer noquery"
-  - "-6 default kod notrap nomodify nopeer noquery"
-  - "192.168.0.0 mask 255.255.0.0 nomodify notrap"
+  - 127.0.0.1 nomodify
+  - -4 default kod notrap nomodify nopeer noquery
+  - -6 default kod notrap nomodify nopeer noquery
+  - 192.168.0.0 mask 255.255.0.0 nomodify notrap
