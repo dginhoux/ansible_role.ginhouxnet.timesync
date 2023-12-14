@@ -1,5 +1,6 @@
 ---
 - name: Install daemon packages for use {{ ntp_daemon_choice }}
+  become: true
   when:
     - ntp_install_package | bool
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_install_package | flatten }}"
@@ -8,6 +9,7 @@
     state: present
 
 - name: Remove other daemons packages
+  become: true
   when:
     - ntp_remove_package | bool
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_remove_package | flatten }}"
@@ -16,6 +18,7 @@
     state: absent
 
 - name: Install tzdata packages
+  become: true
   when:
     - ntp_install_tzdata | bool
   loop: "{{ ntp_tzdata_package | flatten }}"
@@ -32,11 +35,13 @@
 #     group: root
 
 - name: Set timezone
+  become: true
   community.general.timezone:
     name: "{{ ntp_timezone }}"
     # hwclock: UTC
 
 - name: Create chrony confdir
+  become: true
   when:
     - ntp_daemon_choice == "chrony"
   ansible.builtin.file:
@@ -47,6 +52,7 @@
     group: root
 
 - name: Create chrony envfile
+  become: true
   when:
     - ntp_daemon_choice == "chrony"
     - ansible_os_family == "RedHat"
@@ -60,6 +66,7 @@
     group: root
 
 - name: Create chrony envfile
+  become: true
   when:
     - ntp_daemon_choice == "chrony"
     - ansible_os_family == "Debian"
@@ -73,6 +80,7 @@
     group: root
 
 - name: Generate daemon configuration file for {{ ntp_daemon_choice }}
+  become: true
   when:
     - ntp_manage_config | bool
   notify: restart selected daemon
@@ -84,6 +92,7 @@
     group: root
 
 - name: Disable and stop others daemon services
+  become: true
   when:
     - ntp_manage_services | bool
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_disable_service | flatten }}"
@@ -104,12 +113,14 @@
 #   when: ntp_manage_services | bool
 
 - name: Systemd daemon-reload
+  become: true
   when:
     - ansible_service_mgr == "systemd"
   ansible.builtin.systemd:
     daemon_reload: true
 
 - name: Restart daemon service for {{ ntp_daemon_choice }}
+  become: true
   when:
     - ntp_manage_services | bool
   loop: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_enable_service | flatten }}"
