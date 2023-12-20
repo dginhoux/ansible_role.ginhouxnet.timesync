@@ -49,9 +49,10 @@ git clone https://github.com/dginhoux/ansible_role.ntp_sync dginhoux.ntp_sync
 #### EXAMPLE PLAYBOOK
 
 ```yaml
-- hosts: all
-  roles:
-    - name: start role dginhoux.ntp_sync
+- name:
+  hosts: all
+  tasks:
+    - name: Start role dginhoux.ntp_sync
       ansible.builtin.include_role:
         name: dginhoux.ntp_sync
 ```
@@ -61,7 +62,10 @@ git clone https://github.com/dginhoux/ansible_role.ntp_sync dginhoux.ntp_sync
 
 #### DEFAULT VARIABLES
 
-Defaults variables defined in `defaults/main.yml` : 
+Defaults variables defined in `defaults/main.yml`
+
+#### EXAMPLES VARIABLES
+
 
 ```yaml
 ntp_enabled: true
