@@ -83,7 +83,7 @@
   become: true
   when:
     - ntp_manage_config | bool
-  notify: restart selected daemon
+  notify: Restart selected daemon
   ansible.builtin.template:
     src: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_config_file | basename }}.j2"
     dest: "{{ ntp_daemon_conf[ntp_daemon_choice].ntp_daemon_config_file }}"
